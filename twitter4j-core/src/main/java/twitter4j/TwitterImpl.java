@@ -2096,4 +2096,19 @@ class TwitterImpl extends TwitterBaseImpl implements Twitter {
                 "INCLUDE_MY_RETWEET=" + INCLUDE_MY_RETWEET +
                 '}';
     }
+
+    @Override
+    public void addNewUserSubscription(String envName) throws TwitterException {
+        post(conf.getRestBaseURL() + "account_activity/all/"+ envName +"/subscriptions" + ".json");
+    }
+
+    @Override
+    public void removeUserSubscription(String envName, String webHookId) throws TwitterException {
+        post(conf.getRestBaseURL() + "account_activity/all/"+ envName + "/webhooks/" + webHookId + ".json");
+    }
+
+    @Override
+    public void removeUserSubscriptionByApp(String envName, String userId) throws TwitterException {
+        post(conf.getRestBaseURL() + "account_activity/all/"+ envName + "/subscriptions/" + userId + ".json"); 
+    }
 }
